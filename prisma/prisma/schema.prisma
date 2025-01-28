@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// For Prisma Studio demonstration purposes
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+}
+
+model Meme {
+  id    Int     @id @default(autoincrement())
+
+  // Implement a meme model with the following fields:
+  // - title: String
+  // - description: String
+  // - imageUrl: String
+  // 
+  // And an many-to-one relation to the User model
+}
