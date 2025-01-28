@@ -15,15 +15,16 @@ model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
+
+  memes Meme[]
 }
 
 model Meme {
-  id    Int     @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
+  title String
+  description String?
+  imageUrl String
 
-  // Implement a meme model with the following fields:
-  // - title: String
-  // - description: String
-  // - imageUrl: String
-  // 
-  // And an many-to-one relation to the User model
+  userId Int?
+  user   User? @relation(fields: [userId], references: [id])
 }

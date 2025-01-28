@@ -10,7 +10,7 @@ export async function POST(req) {
     const { title, imageUrl, description, userId } = data;
 
     // Simple validation to ensure required fields are present
-    if (!title || !imageUrl || !description || !userId) {
+    if (!title || !imageUrl || !description) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
     
@@ -20,6 +20,7 @@ export async function POST(req) {
   } catch (error) {
     console.error(error);
     
+    // Return a generic error message for now
     return NextResponse.json({ error: "An error occurred" }, { status: 500 });
   }
 }

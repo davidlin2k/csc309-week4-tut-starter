@@ -3,11 +3,26 @@ import { prisma } from "@/lib/prisma";
 export class MemeService {
   async generateRandomMeme() {
     // Implement the logic to generate a random meme
-    throw new Error("Not implemented");
+    const memes = await prisma.meme.findMany();
+
+    if (memes.length === 0) {
+      throw new Error("No memes found");
+    }
+
+    const randomIndex = Math.floor(Math.random() * memes.length);
+    return memes[randomIndex];
   }
 
   async createMeme({ title, imageUrl, description, userId }) {
-    // Implement the logic to create a meme
-    throw new Error("Not implemented");
+    const newMeme = await prisma.meme.create({
+      data: {
+        title,
+        imageUrl,
+        description,
+        user: userId ? { connect: { id: userId } } : undefined,
+      },
+    });
+
+    return newMeme;
   }
 }
